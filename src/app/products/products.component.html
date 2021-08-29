@@ -1,0 +1,33 @@
+<main class="grid container">
+  <!-- <div *ngFor="let i of products | appFilter: searchText"> -->
+  <article
+    *ngFor="
+      let i of products
+        | appFilter: searchText:['name', 'description']
+        | slice: elem:elem + 10
+    "
+    class="item"
+  >
+    <img [src]="i.image" alt="Sample photo" />
+    <div class="text">
+      <h3>{{ i.dateLastEdited | date: "short" }}</h3>
+      <p>{{ i.description }}</p>
+      <button>{{ i.name }}</button>
+    </div>
+  </article>
+</main>
+
+<nav aria-label="Page navigation  example">
+  <ul class="pagination" style="justify-content: center; cursor: pointer">
+    <li class="page-item" (click)=" counterUpdate('first')">First</li>
+
+    <li class="page-item actie" (click)=" counterUpdate('prev')">
+      «
+    </li>
+    <li class="page-item">
+      page {{ counter }} of {{ this.products.length / 10 }}
+    </li>
+    <li class="page-item" (click)=" counterUpdate('next')">»</li>
+    <li class="page-item" (click)=" counterUpdate('last')">Last</li>
+  </ul>
+</nav>

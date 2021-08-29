@@ -1,0 +1,10 @@
+<div>
+  <span class="search-box">Feed Search</span>
+  <input
+    type="text"
+    placeholder="search element"
+    [(ngModel)]="searchText"
+    (keyup.enter)="onSearch()"
+    (keyup)="onSearch()"
+  />
+</div>
