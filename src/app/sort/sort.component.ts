@@ -9,7 +9,7 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./sort.component.scss']
 })
 export class SortComponent implements OnInit {
-  selectedVal = 1;
+  selectedVal = '0';
   constructor(private data: DataService, private api: ApiService) { }
 
   ngOnInit(): void {
@@ -19,22 +19,31 @@ export class SortComponent implements OnInit {
     this.api.getProducts()
 
       .subscribe((result: IProduct[]) => {
+        let data;
+        if (this.selectedVal === '1') {
+          data = this.sortOnTitle(result);
 
-        if (this.selectedVal === 1) {
-          this.sortOnTitle(result);
-        } else if (this.selectedVal === 2) {
-          this.sortOnDate(result);
+
+        } else if (this.selectedVal === '2') {
+          data = this.sortOnDate(result);
+        } else {
+          data = result;
         }
-        this.data.productsList.next(result);
+
+        this.data.productsList.next(data);
       });
   }
 
   sortOnDate(myArr): void {
-    myArr.sort((a, b) => new Date(b.dateLastEdited).getTime() - new Date(a.dateLastEdited).getTime());
+    return myArr.sort((a, b) =>
+    (new Date(b.dateLastEdited).getTime() - new Date(a.dateLastEdited).getTime()
+      ? 1 : -1));
   }
 
   sortOnTitle(myArr): void {
-    myArr.sort((a, b) => (a.name < b.name ? -1 : 1));
+
+    return myArr.sort((a, b) => a.name.localeCompare(b.name));
+
 
   }
 

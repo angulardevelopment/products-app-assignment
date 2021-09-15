@@ -1,7 +1,7 @@
 import { IProduct } from './../interfaces/product';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { DataService } from '../services/data.service';
 import { ApiService } from '../api.service';
 
@@ -23,7 +23,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(this.data.searchKeyword.subscribe((res) => {
       this.searchText = res;
-      this.exactSearch();
+      if ((this.searchText).indexOf('"') > -1) {
+      this.products = this.exactSearch();
+      }
     }));
 
 
@@ -32,16 +34,20 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   }
 
-  exactSearch(): void {
+  exactSearch() {
 
-    if ((this.searchText).indexOf('"') > -1) {
-      this.searchText = this.searchText.replace('"', '');
-      this.products.filter(el => el.description.indexOf (this.searchText) > 0);
-    }
+
+      const tempText = this.searchText.replace(/"/g, "");
+
+
+      const products = this.products.filter(el => el.description.indexOf(tempText) > 0);
+
+      return products;
+
 
   }
 
-  productsData(): void {
+  productsData() {
     this.api.getProducts()
 
       .subscribe((result: IProduct[]) => {

@@ -1,5 +1,4 @@
 <main class="grid container">
-  <!-- <div *ngFor="let i of products | appFilter: searchText"> -->
   <article
     *ngFor="
       let i of products
@@ -19,15 +18,13 @@
 
 <nav aria-label="Page navigation  example">
   <ul class="pagination" style="justify-content: center; cursor: pointer">
-    <li class="page-item" (click)=" counterUpdate('first')">First</li>
+    <li class="page-item" (click)="counterUpdate('first')">First</li>
 
-    <li class="page-item actie" (click)=" counterUpdate('prev')">
-      «
-    </li>
+    <li class="page-item actie" (click)="counterUpdate('prev')">«</li>
     <li class="page-item">
-      page {{ counter }} of {{ this.products.length / 10 }}
+      page {{ counter }} of {{ this.products && this.products.length / 10 }}
     </li>
-    <li class="page-item" (click)=" counterUpdate('next')">»</li>
-    <li class="page-item" (click)=" counterUpdate('last')">Last</li>
+    <li class="page-item" (click)="counterUpdate('next')">»</li>
+    <li class="page-item" (click)="counterUpdate('last')">Last</li>
   </ul>
 </nav>

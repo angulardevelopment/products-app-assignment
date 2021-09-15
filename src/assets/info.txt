@@ -1,0 +1,6 @@
+
+feedback-
+1. It returns correct results when the search term is `king` but results are incorrect when the search term is `the king` - working fine in my case
+2. Sorting doesn't seem to work - done
+3. Table section is missing
+4. Unit Tests are not included - done
