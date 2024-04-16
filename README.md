@@ -21,6 +21,8 @@ I'm Sam, and I'm passionate about product engineering and web development. I cre
 
 ### About the app
 Implemented basics search app in Angular.
+https://www.figma.com/file/tGcttIZgj6R4B57X2ROaJv/product-create-modal?node-id=0%3A1
+https://www.figma.com/proto/taQbDkCV0WHE1bru5GTVsC/cancellation-survey
 
 ## Subscribe and Stay Updated!
 
